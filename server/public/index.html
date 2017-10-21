@@ -7,10 +7,41 @@
     <title>TODO App</title>
     <script src="vendors/jquery-3.2.1.min.js"></script>
     <script src="scripts/client.js"></script>
-    <!--bootstrap-theme , bootstrap.css-->
+    
+    <!--bootstrap-->
+    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap-theme.css">
+
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>TODO App</h1>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <h1>TO-DO App</h1>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="taskIn">Add a Task:</label>
+                <input type="text" class="form-control" id="taskIn" placeholder="task">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+         <div class="container">
+             <h2>To Do:</h2>
+             <table class="table">
+                 <thead>
+                     <tr>
+                         <th>Tasks</th>
+                         <th>Complete</th>
+                         <th>Delete</th>
+                        </tr>
+                 </thead>
+                 <tbody id="taskList">
+
+                 </tbody>
+             </table>
+         </div>
+    </div>
 </body>
 </html>
