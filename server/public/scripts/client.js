@@ -45,10 +45,15 @@ function appendToDom(arr){
     //clear table at start
     $('#taskList').empty();
     for (var i = 0; i < arr.length; i++){
-        taskItem = arr[i];// need var?
+        var taskItem = arr[i];// need var?
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
         $tr.append('<td>' + taskItem.task + '</td>');
+        if(!taskItem.completedStatus){
+        $tr.append('<button type="button" class="btn btn-success">COMPLETE</button>');
+        }
+        $tr.append('<button type="button" class="btn btn-danger">DELETE</button>');
+        $('#taskList').append($tr);
     }
 }
 

@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 var todoRouter = require('./routes/todo_router.js');
-app.use('/todo', todoRouter);
+app.use('/tasks', todoRouter);
 
 app.use(express.static('server/public'));
 

@@ -53,7 +53,7 @@ router.post('/', function(req, res){
         } else {
             //successful connection to db, pool -1
           var queryText = 'INSERT INTO "tasks" ("task", "completed") VALUES ($1, $2);';
-          db.query(queryText, [receivedTask.task, receivedTask.completed], function (errorMakingQuery, result) {
+          db.query(queryText, [receivedTask.task, receivedTask.completedStatus], function (errorMakingQuery, result) {
               //received an error or result at this point
               done(); //pool +1
               if (errorMakingQuery) {
