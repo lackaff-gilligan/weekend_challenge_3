@@ -40,5 +40,32 @@ router.get('/', function (req, res){
 }); // END GET ROUTE
 
 //POST ROUTE
+router.post('/', function(req, res){
+    var receivedTask = req.body; //the data sent to server
+    console.log('req.body, now "receivedTask":', receivedTask);
+    
+    //attempt to connect to db
+    pool.connect(function (errorConnectingToDb, db, done){
+        if(errorConnectingToDb){
+            //there was an error, no connection was made
+            console.log('Error connecting', errorConnectingToDb);
+            res.sendStatus(500);
+        } else {
+            //successful connection to db, pool -1
+          var queryText = 'INSERT INTO "tasks" ("task", "completed") VALUES ($1, $2);';
+          db.query(queryText, [receivedTask.task, receivedTask.completed], function (errorMakingQuery, result) {
+              //received an error or result at this point
+              done(); //pool +1
+              if (errorMakingQuery) {
+                  console.log('Error making query', errorMakingQuery);
+                  res.sendStatus(500);
+              } else {
+                  // Send back success
+                  res.sendStatus(201);
+              }
+          });//END QUERY
+        }
+    }); //END POOL
+});
 
 module.exports = router;

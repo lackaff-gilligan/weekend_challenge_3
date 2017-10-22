@@ -14,10 +14,10 @@ function readyNow(){
 
 function submitClicked(){
     console.log('in submitClicked');
-    var newTask = $('#taskIn').val();
+    var addedTask = $('#taskIn').val();
     // create object
     var taskToSend = {
-        task: newTask,
+        task: addedTask,
         completedStatus: false
     };
     //call function that makes POST request
@@ -45,7 +45,7 @@ function appendToDom(arr){
     //clear table at start
     $('#taskList').empty();
     for (var i = 0; i < arr.length; i++){
-        taskItem = arr[i];
+        taskItem = arr[i];// need var?
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
         $tr.append('<td>' + taskItem.task + '</td>');
