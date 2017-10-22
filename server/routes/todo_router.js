@@ -11,6 +11,7 @@ var config = {
     idleTimeoutMillis: 30000
 }
 
+//create pool
 var pool = new pg.Pool(config);
 
 //GET route
@@ -25,7 +26,7 @@ router.get('/', function (req, res){
             //successfully connected to db, pool -1
             var queryText = 'SELECT * FROM "tasks";';
             db.query(queryText, function (errorMakingQuery, result){
-               //We have recieved an error or result
+               //We have recieved an error or result at this point
                done(); //pool +1
                if (errorMakingQuery) {
                    console.log('Error making query', errorMakingQuery);
@@ -36,6 +37,8 @@ router.get('/', function (req, res){
             }); // END QUERY
         }
     }); //END POOL
-});
+}); // END GET ROUTE
+
+//POST ROUTE
 
 module.exports = router;
