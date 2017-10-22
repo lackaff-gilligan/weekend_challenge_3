@@ -10,6 +10,8 @@ function readyNow(){
    getTasks();
    // click handlers
    $('#submitBtn').on("click", submitClicked);
+   $('#taskList').on("click", ".btn-success", toDoCompleted);
+   $('#taskList').on("click", ".btn-danger", deleteTask);
 } // end readyNow
 
 function submitClicked(){
@@ -45,7 +47,7 @@ function appendToDom(arr){
     //clear table at start
     $('#taskList').empty();
     for (var i = 0; i < arr.length; i++){
-        var taskItem = arr[i];// need var?
+        var taskItem = arr[i];
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
         $tr.append('<td>' + taskItem.task + '</td>');
@@ -70,4 +72,12 @@ function sendTask(objToSend){
    }).fail(function(error){
        alert('Something went wrong');
    });
+}
+
+toDoCompleted(){
+ $(this).closest('tr')... //122 client.js
+}
+
+deleteTask(){
+
 }
