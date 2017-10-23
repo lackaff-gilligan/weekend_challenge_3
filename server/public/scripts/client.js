@@ -10,8 +10,8 @@ function readyNow(){
    getTasks();
    // click handlers
    $('#submitBtn').on("click", submitClicked);
-   $('#taskList').on("click", ".btn-success", toDoCompleted);
-   $('#taskList').on("click", ".btn-danger", deleteTask);
+   $('#taskList').on("click", ".btn-success", completeClicked);
+  // $('#taskList').on("click", ".btn-danger", deleteTask);
 } // end readyNow
 
 function submitClicked(){
@@ -20,7 +20,7 @@ function submitClicked(){
     // create object
     var taskToSend = {
         task: addedTask,
-        completedStatus: false
+        completedStatus: taskComplete //change from 'false' to the variable
     };
     //call function that makes POST request
     sendTask(taskToSend);
@@ -51,8 +51,11 @@ function appendToDom(arr){
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
         $tr.append('<td>' + taskItem.task + '</td>');
-        if(!taskItem.completedStatus){
+        if(!taskItem.completedStatus){ //shouldn't this be the opposite? or taskItem.completed?
         $tr.append('<button type="button" class="btn btn-success">COMPLETE</button>');
+        } else {
+            $tr.append('<p class="completed">COMPLETED</p>');
+            $tr.css("background-color", "green");
         }
         $tr.append('<button type="button" class="btn btn-danger">DELETE</button>');
         $('#taskList').append($tr);
@@ -74,10 +77,13 @@ function sendTask(objToSend){
    });
 }
 
-toDoCompleted(){
- $(this).closest('tr')... //122 client.js
+function completeClicked() {
+ var currentTask = $(this).closest('tr').data('taskItem'); //122 client.js
+ console.log(currentTask);
+ currentTask.completed = true;
+
 }
 
-deleteTask(){
+// function deleteTask(){
 
-}
+// }
