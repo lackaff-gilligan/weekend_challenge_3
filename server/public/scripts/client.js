@@ -16,6 +16,7 @@ function readyNow(){
 
 function submitClicked(){
     console.log('in submitClicked');
+    taskComplete = false;
     var addedTask = $('#taskIn').val();
     // create object
     var taskToSend = {
@@ -81,7 +82,12 @@ function completeClicked() {
     console.log('in completeClicked');
    //switch to true
     taskComplete = true; 
- var taskId = $(this).closest('tr').data('id');
+ //var taskId = $(this).closest('tr').data('id');
+ var taskId = $(this).data('id');
+ console.log('var taskId:', taskId);
+ console.log('this button', $(this));
+ 
+ 
  var currentTask = $(this).closest('tr').data('taskItem'); //122 client.js
  console.log(currentTask);
  //switch to true

@@ -70,7 +70,7 @@ router.post('/', function(req, res){
 
 //PUT ROUTE
 router.put('/:id', function(req, res){
-    console.log(req.params);
+    console.log('req.params from PUT:', req.params);
     var taskId = req.params.id; //not yet sure why .id works here??
     console.log('req.body from PUT:', req.body);
     var task = req.body;
@@ -84,7 +84,7 @@ router.put('/:id', function(req, res){
         } else {
             //we connected to db! pool -1
             var queryText = 'UPDATE "tasks" SET "completed" = $1 WHERE "id" = $2;';
-            db.query(queryText, [task.completed, taskId], function (errorMakingQuery, result){
+            db.query(queryText, [task.completedStatus, taskId], function (errorMakingQuery, result){
                 //we have received an error or result at this point
                 done(); // pool +1
                 if(errorMakingQuery){
