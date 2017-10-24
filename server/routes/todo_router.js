@@ -100,4 +100,30 @@ router.put('/:id', function(req, res){
     
 }); //END PUT ROUTE
 
+//DELETE ROUTE
+router.delete('/:id', function (req, res){
+    var taskId = req.params.id;
+    //attempt to connect to db
+    pool.connect(function (errorConnectingToDb, db, done){
+        if (errorConnectingToDb){
+            // there was an error and no connection was made
+            console.log('Error connecting', errorConnectingToDb);
+            res.sendStatus(500);
+        } else {
+           //we connected to db! pool -1
+           var queryText = 'DELETE FROM "tasks" WHERE "id" = $1;';
+           db.query(queryText, [taskId], function (errorMakingQuery, result){
+               //we have received an error or result at this point
+               done(); // pool +1
+               if (errorMakingQuery) {
+                   console.log('Error making query', errorMakingQuery);
+                   res.sendStatus(500);
+               } else {
+                   res.send(result.rows);
+               }
+           }); //END QUERY
+        }
+    }); //END POOL
+}); //END DELETE ROUTE
+
 module.exports = router;

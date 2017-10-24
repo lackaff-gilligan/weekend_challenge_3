@@ -11,7 +11,7 @@ function readyNow(){
    // click handlers
    $('#submitBtn').on("click", submitClicked);
    $('#taskList').on("click", ".btn-success", completeClicked);
-  // $('#taskList').on("click", ".btn-danger", deleteTask);
+  $('#taskList').on("click", ".btn-danger", deleteTask);
 } // end readyNow
 
 function submitClicked(){
@@ -115,6 +115,18 @@ function completeClicked() {
 
 }
 
-// function deleteTask(){
+function deleteTask(){
+  var taskId = $(this).data('id');
+  console.log('Delete task with id:', taskId);
 
-// }
+  //ajax DELETE request
+  $.ajax({
+      method: 'DELETE',
+      url: '/tasks/' + taskId
+  }).done(function(response){
+      getTasks();
+  }).fail(function(error){
+      alert('something went wrong');
+  })
+  
+}
