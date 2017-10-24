@@ -51,13 +51,13 @@ function appendToDom(arr){
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
         $tr.append('<td>' + taskItem.task + '</td>');
-        if(!taskItem.completedStatus){ //shouldn't this be the opposite? or taskItem.completed?
-        $tr.append('<button type="button" class="btn btn-success">COMPLETE</button>');
+        if(taskItem.completed === false){ //the property needs to match what's being sent back from server
+        $tr.append('<button type="button" data-id="' + taskItem.id + '"class="btn btn-success">COMPLETE</button>');
         } else {
             $tr.append('<p class="completed">COMPLETED</p>');
             $tr.css("background-color", "green");
         }
-        $tr.append('<button type="button" class="btn btn-danger">DELETE</button>');
+        $tr.append('<button type="button" data-id="' + taskItem.id + '"class="btn btn-danger">DELETE</button>');
         $('#taskList').append($tr);
     }
 }
@@ -78,9 +78,34 @@ function sendTask(objToSend){
 }
 
 function completeClicked() {
+    console.log('in completeClicked');
+   //switch to true
+    taskComplete = true; 
+ var taskId = $(this).closest('tr').data('id');
  var currentTask = $(this).closest('tr').data('taskItem'); //122 client.js
  console.log(currentTask);
- currentTask.completed = true;
+ //switch to true
+ //currentTask.completed = true;
+ //var taskNowComplete = currentTask.completed;
+ //console.log(currentTask.completed);
+
+ //create new obj to send with completed = true
+ var taskCompToSend = {
+    task: currentTask.task,
+    completedStatus: taskComplete //change from 'false' to the variable
+};
+
+
+ //ajax put request
+ $.ajax({
+     method: 'PUT',
+     url: '/tasks/' + taskId, //req.params
+     data: taskCompToSend //req.body
+ }).done(function(response){
+     getTasks(); //run the GET request
+ }).fail(function(error){
+     alert('something went wrong');
+ });
 
 }
 
