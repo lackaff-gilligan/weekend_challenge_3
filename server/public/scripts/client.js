@@ -40,7 +40,7 @@ function getTasks(){
         console.log(tasks);
         appendToDom(tasks);
     }).fail(function(error){
-        alert('something went wrong');
+        console.log('something went wrong in GET req:', error);
     });
 } // end getTasks
 
@@ -51,17 +51,18 @@ function appendToDom(arr){
         var taskItem = arr[i];
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
-        $tr.append('<td>' + taskItem.task + '</td>');
-        if(taskItem.completed === false){ //the property needs to match what's being sent back from server
-        $tr.append('<button type="button" data-id="' + taskItem.id + '"class="btn btn-success">COMPLETE</button>');
-        } else {
-            $tr.append('<p class="completed">COMPLETED</p>');
+        $tr.append('<td class="col-md-4">' + taskItem.task + '</td>');
+        if(taskItem.completed === false){
+            $tr.append('<td><button type="button" data-id="' + taskItem.id + '"class="btn btn-success">COMPLETE</button></td>');
+        }
+        else {
+            $tr.append('<td><p>COMPLETED</p></td>');
             $tr.css("background-color", "green");
         }
-        $tr.append('<button type="button" data-id="' + taskItem.id + '"class="btn btn-danger">DELETE</button>');
+        $tr.append('<td class="col-md-4"><button type="button" data-id="' + taskItem.id + '"class="btn btn-danger">DELETE</button></td>');
         $('#taskList').append($tr);
-    }
-}
+    } //END Loop
+}//END appendToDom
 
 function sendTask(objToSend){
    //ajax POST request
@@ -74,7 +75,7 @@ function sendTask(objToSend){
        //make GET request to refresh task list
        getTasks();
    }).fail(function(error){
-       alert('Something went wrong');
+       console.log('Something went wrong in POST req:', error);
    });
 }
 
@@ -110,7 +111,7 @@ function completeClicked() {
  }).done(function(response){
      getTasks(); //run the GET request
  }).fail(function(error){
-     alert('something went wrong');
+     console.log('something went wrong in PUT req:', error);
  });
 
 }
@@ -126,7 +127,7 @@ function deleteTask(){
   }).done(function(response){
       getTasks();
   }).fail(function(error){
-      alert('something went wrong');
+      console.log('something went wrong in DELETE req:', error);
   })
   
 }
