@@ -51,15 +51,15 @@ function appendToDom(arr){
         var taskItem = arr[i];
         var $tr = $('<tr></tr>');
         $tr.data('taskItem', taskItem);
-        $tr.append('<td class="col-md-4">' + taskItem.task + '</td>');
+        $tr.append('<td class="col-md-8">' + taskItem.task + '</td>');
         if(taskItem.completed === false){
             $tr.append('<td><button type="button" data-id="' + taskItem.id + '"class="btn btn-success">COMPLETE</button></td>');
         }
         else {
             $tr.append('<td><p>COMPLETED</p></td>');
-            $tr.addClass("green");
+            $tr.addClass("success"); //bootstrap class (green background-color)
         }
-        $tr.append('<td class="col-md-4"><button type="button" data-id="' + taskItem.id + '"class="btn btn-danger">DELETE</button></td>');
+        $tr.append('<td><button type="button" data-id="' + taskItem.id + '"class="btn btn-danger">DELETE</button></td>');
         $('#taskList').append($tr);
     } //END Loop
 }//END appendToDom
