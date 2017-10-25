@@ -95,7 +95,7 @@ function completeClicked() {
  //create new obj to send with completed = true
  var taskCompToSend = {
     task: currentTask.task,
-    completedStatus: taskComplete //change from 'false' to the variable
+    completedStatus: taskComplete //variable now 'true'
 };
 
 

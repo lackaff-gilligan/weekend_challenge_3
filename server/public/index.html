@@ -22,18 +22,26 @@
             <h1 class="text-center myTitle">To-Do App</h1>
         </div>
         <form>
-            <div class="form-group">
-                <!--<label for="taskIn">Add a Task:</label>-->
+            <div class="row">
+            <div class="form-group col-md-8">
+                <label for="taskIn">Add a Task:</label>
                 <input type="text" class="form-control" id="taskIn" placeholder="add a task...">
             </div>
+            <div class="form-group col-md-4">
+                <label for="dueDate">Due:</label>
+               <input type="text" class="form-control" id="dueDate" placeholder="yyyy-mm-dd">
+            </div>
+        </div>
             <button type="submit" id="submitBtn" class="btn btn-default">Submit</button>
         </form>
+        
          <div class="container">
              <h2 class="text-center myTasks">My Tasks:</h2>
              <table class="table table-bordered table-hover text-center">
                  <thead>
                      <tr class="info">
-                         <th class="col-md-8 text-center">Tasks</th>
+                         <th class="col-md-6 text-center">Tasks</th>
+                         <th class="col-md-2 text-center">Due</th>
                          <th class="col-md-2 text-center">Complete</th>
                          <th class="col-md-2 text-center">Delete</th>
                         </tr>
