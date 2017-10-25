@@ -113,17 +113,23 @@ function completeClicked() {
 }
 
 function deleteTask(){
-  var taskId = $(this).data('id');
-  console.log('Delete task with id:', taskId);
+    //verify the user wants to delete
+    var confirmDel = confirm('Are you sure you want to delete this task?');
+    //store that delete button's row id
+   var taskId = $(this).data('id');
+    console.log('Delete task with id:', taskId);
+    //if user confirms, continue with DELETE request
+   if(confirmDel === true){
+//ajax DELETE request
+$.ajax({
+    method: 'DELETE',
+    url: '/tasks/' + taskId
+}).done(function(response){
+    getTasks();
+}).fail(function(error){
+    console.log('something went wrong in DELETE req:', error);
+})
 
-  //ajax DELETE request
-  $.ajax({
-      method: 'DELETE',
-      url: '/tasks/' + taskId
-  }).done(function(response){
-      getTasks();
-  }).fail(function(error){
-      console.log('something went wrong in DELETE req:', error);
-  })
-  
+   }
+ 
 }
