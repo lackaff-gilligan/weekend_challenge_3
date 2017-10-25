@@ -57,7 +57,7 @@ function appendToDom(arr){
         }
         else {
             $tr.append('<td><p>COMPLETED</p></td>');
-            $tr.css("background-color", "green");
+            $tr.addClass("green");
         }
         $tr.append('<td class="col-md-4"><button type="button" data-id="' + taskItem.id + '"class="btn btn-danger">DELETE</button></td>');
         $('#taskList').append($tr);
@@ -91,10 +91,6 @@ function completeClicked() {
  
  var currentTask = $(this).closest('tr').data('taskItem'); //122 client.js
  console.log(currentTask);
- //switch to true
- //currentTask.completed = true;
- //var taskNowComplete = currentTask.completed;
- //console.log(currentTask.completed);
 
  //create new obj to send with completed = true
  var taskCompToSend = {
